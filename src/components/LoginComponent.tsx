@@ -1,11 +1,10 @@
-// TypeScript
 import React, { useState } from 'react';
 import '../style.css'
-type LoginComponentProps = {
-  onSubmit: (email: string, password: string) => void | Promise<void>;
-};
-
-export default function LoginComponent({ onSubmit }: LoginComponentProps) {
+export default function LoginComponent({
+    onSubmit,
+     }:{
+    onSubmit: (email: string, password: string) => void | Promise<void>;
+}){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -31,28 +30,28 @@ export default function LoginComponent({ onSubmit }: LoginComponentProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label style={{ display: 'block', marginBottom: 12 }}>
-        <span style={{ display: 'block' }}>Email</span>
-        <input
+      <form onSubmit={handleSubmit} className="col">
+          <label className="col">
+              <span>Email</span>
+              <input
+                  className="input"
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="you@example.com"
           required
-          style={{ width: '100%', padding: 8 }}
         />
       </label>
 
-      <label style={{ display: 'block', marginBottom: 12 }}>
-        <span style={{ display: 'block' }}>Password</span>
+          <label className="col">
+              <span>Password</span>
         <input
-          type="password"
+            className="input"
+            type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
           placeholder="••••••••"
           required
-          style={{ width: '100%', padding: 8 }}
         />
       </label>
 
@@ -60,10 +59,18 @@ export default function LoginComponent({ onSubmit }: LoginComponentProps) {
         <div style={{ color: 'crimson', marginBottom: 12 }}>{error}</div>
       )}
 
-      <button type="submit" disabled={submitting} style={{ padding: '8px 12px' }}>
+      <button type="submit" disabled={submitting} className="button">
         {submitting ? 'Logging in…' : 'Log in'}
       </button>
     </form>
   );
 }
+/*
+todo:
+Submit-knop die `POST /api/login` aanroept met `credentials: 'include'`.
+Loading-state en foutmelding afhandelen.
+
+Verder:
+geen tokens in localStorage/session, alles via de HTTPOnly cookie
+api aanroepen gebruiken: credentials: include*/
 

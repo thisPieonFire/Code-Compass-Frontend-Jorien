@@ -18,18 +18,13 @@ export default function LoginPage() {
     };
 
     return (
-        <div style={{ maxWidth: 420, margin: '40px auto' }}>
-            <h1>Login</h1>
-            <LoginComponent onSubmit={handleLogin} />
+        <div className="layout">
+            <div className="auth-card">
+                <h1 className="brand-title">Log in</h1>
+                <p className="brand-subtitle">Welcome back — sign in to continue.</p>
+                <LoginComponent onSubmit={handleLogin} />
+            </div>
         </div>
+
     );
 }
-
-// todo How to use the classes in your JSX
-// - Wrap your page in: className="layout"
-// - Wrap the login box in: className="auth-card"
-// - Title: className="brand-title"
-// - Subtitle: className="brand-subtitle"
-// - Inputs: className="input"
-// - Button: className="button"
-// - Optional links: className="link"

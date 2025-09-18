@@ -1,30 +1,44 @@
-/*
-import React, {useState, useEffect} from "react";
+import { Link } from 'react-router-dom';
+import '../style.css'
+
+type User = {
+    email: string;
+    displayName?: string;
+} | null;
 
 
-type UserProps = {
-    name: string;
-    age: number;
-};
+export default function WelcomeComponent({
+                                             user,
+                                             onLogout,
+                                         }: {
+    user: User;
+    onLogout: () => void;
+}) {
+    const name = user?.displayName || user?.email || '';
 
-const GreetingCard: React.FC<UserProps> = ({ name, age }) => {
-    const [message, setMessage] = useState<string>('');
-    if (age < 18) {
-        setMessage(`Hey ${name}, you're quite young!`);
-    } else {
-        // Otherwise, set a default message
-        setMessage(`Hello ${name}, welcome back.`);
-    }
-}, [name, age]); // Dependency array: rerun effect when 'name' or 'age' changes
+    return (
+        <div className="auth-card">
+            <h1 className="brand-title">
+                Welcome{user ? `, ${name}` : ''}
+            </h1>
+            <p className="brand-subtitle">
+                {user ? 'You are signed in.' : 'You are not signed in yet.'}
+            </p>
 
 
-// This is the JSX part: the UI that gets rendered
-return (
-    <div className="p-4 bg-blue-100 rounded shadow-md">
-        {/!* Heading *!/}
-        <h1 className="text-xl font-bold mb-2">Greeting</h1>
-        {/!* Render the message from state *!/}
-        <p>{message}</p>
-    </div>
-);
-};*/
+            <div className="col">
+                {user ? (
+                    <button className="button" onClick={onLogout}>
+                        Log out
+                    </button>
+                ) : (
+                    <p style={{ textAlign: 'center', margin: 0 }}>
+                        Ready to dive in?{' '}
+                        <Link to="/login" className="link">Go to Login</Link>
+                    </p>
+                )}
+            </div>
+        </div>
+    );
+}
+
