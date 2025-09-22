@@ -1,20 +1,26 @@
 import '../style.css'
 import { useNavigate } from 'react-router-dom';
 import LoginComponent from '../components/LoginComponent';
+import { login } from '../lib/api';
 
 export default function LoginPage() {
-    const navigate = useNavigate();
-
+        const navigate = useNavigate();
     const handleLogin = async (email: string, password: string) => {
-        // Replace this mock with your real API call later.
-        // For now, “log in” if non-empty email/password.
-        if (email.trim() && password.trim()) {
-            // Example: store a token or user info in localStorage/session
-            localStorage.setItem('auth', JSON.stringify({ email }));
-            navigate('/'); // Redirect to the home page
-            return;
+        try {
+            const res = await login(email, password);
+            if (!res || !res.user) {
+                throw new Error('Invalid login response from server');
+            }
+            localStorage.setItem('userInfoRes', JSON.stringify(res.user));
+            navigate('/');
+        } catch (err) {
+            console.error('[login] failed', err);
+            if (err instanceof Error) {
+                throw err;
+            }
+            throw new Error('Login failed');
         }
-        alert('Invalid credentials');
+
     };
 
     return (
@@ -28,3 +34,8 @@ export default function LoginPage() {
 
     );
 }
+
+
+
+/*               let message = "we got to here";
+            alert(message);*/

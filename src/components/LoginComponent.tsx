@@ -23,7 +23,7 @@ export default function LoginComponent({
       setSubmitting(true);
       await onSubmit(email, password);
     } catch (err) {
-      setError('Login failed. Please try again.');
+        setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -69,8 +69,5 @@ export default function LoginComponent({
 todo:
 Submit-knop die `POST /api/login` aanroept met `credentials: 'include'`.
 Loading-state en foutmelding afhandelen.
-
-Verder:
-geen tokens in localStorage/session, alles via de HTTPOnly cookie
-api aanroepen gebruiken: credentials: include*/
+*/
 
