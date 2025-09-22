@@ -40,9 +40,3 @@ export default function WelcomeComponent({
         </div>
     );
 }
-
-/*
-const handleLogout = () => {
-    localStorage.removeItem('auth');
-    location.reload();
-};*/

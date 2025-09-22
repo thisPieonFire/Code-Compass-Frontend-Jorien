@@ -3,8 +3,6 @@
 import '../style.css';
 import WelcomeComponent from "../components/WelcomeComponent.tsx";
 
-/*export default function HomePage() {
-      const user = auth ? JSON.parse(auth) : null;*/
 export default function HomePage() {
     const raw = localStorage.getItem('userInfoRes');
   let user: { email: string; displayName?: string } | null = null;
@@ -15,9 +13,6 @@ export default function HomePage() {
             user = null;
         }
     }
-
-
-
 
     return (
         <div className="layout">

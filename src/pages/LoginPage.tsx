@@ -37,5 +37,4 @@ export default function LoginPage() {
 
 
 
-/*               let message = "we got to here";
-            alert(message);*/
+/* voor de protection: een protectionComponent aanmaken die de routes beveiligt. Moet "authcontext" gebruiken.*/
