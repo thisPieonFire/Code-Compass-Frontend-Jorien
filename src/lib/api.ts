@@ -84,6 +84,13 @@ export function logout() {
         { method: 'POST' });
 }
 
+export function createUser(email: string, displayName: string, password: string, role: string) {
+    return request<{ user: { email: string, displayName: string},}>(
+        '/api/users',
+        { method: 'POST', json: { email, displayName, password, role } }
+    );
+}
+
 export function me() {
     return request<{ id: string; role: string; displayName?: string }>(
         '/api/me',
