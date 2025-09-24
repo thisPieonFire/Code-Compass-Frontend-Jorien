@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import '../style.css'
+import {useSnackbar} from "./SnackbarContext.tsx";
 export default function UserCreationComponent({
     onSubmit,
                                         }:{
-    onSubmit: (email: string, displayName: string, password: string, role: string) => void | Promise<void>;
+    onSubmit: (email: string, displayName: string, role: string) => void | Promise<void>;
 }) {
     const [email, setEmail] = useState('');
     const [displayName, setDisplayName] = useState('');
-    const [password, setPassword] = useState('');
     const [role, setRole] = useState('TRAINEE');
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const {showMessage} = useSnackbar();
 
 const handleSubmit = async (e:React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    if (!email || !password) {
-        setError('Please enter email and password.');
+    if (!email) {
+        setError('Please enter an email.');
         return;
     }
     try {
         setSubmitting(true);
-        await onSubmit(email, displayName, password, role);
+        await onSubmit(email, displayName, role);
     } catch (err) {
-        setError(err instanceof Error ? err.message : 'Sign up failed. Please try again.');
+        showMessage("Sign up failed. Please try again.", "error")
+        setError(err instanceof Error ? err.message : 'Sign up failed.');
     } finally {setSubmitting(false);
     }
 };
@@ -53,17 +55,6 @@ const handleSubmit = async (e:React.FormEvent) => {
                 />
 
             </label>
-            <label className="col">
-                <span>Password</span>
-                <input
-                    className="input"
-                    type="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                />
-            </label>
 
             <label className="col">
                 <span>Role</span>
@@ -82,7 +73,7 @@ const handleSubmit = async (e:React.FormEvent) => {
             )}
 
             <button type="submit" disabled={submitting} className="button">
-                {submitting ? 'Adding…' : 'Add'}
+                {submitting ? 'Processing…' : 'Add'}
             </button>
         </form>
     );

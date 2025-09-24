@@ -84,10 +84,10 @@ export function logout() {
         { method: 'POST' });
 }
 
-export function createUser(email: string, displayName: string, password: string, role: string) {
+export function createUser(email: string, displayName: string, role: string) {
     return request<{ user: { email: string, displayName: string},}>(
         '/api/users',
-        { method: 'POST', json: { email, displayName, password, role } }
+        { method: 'POST', json: { email, displayName, role } }
     );
 }
 

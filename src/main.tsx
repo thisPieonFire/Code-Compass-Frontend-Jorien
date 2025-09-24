@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {SnackbarProvider} from "./components/SnackbarContext.tsx";
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import CreateUserPage from "./pages/CreateUserPage.tsx";
@@ -20,6 +21,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
+        <SnackbarProvider>
         <RouterProvider router={router} />
+        </SnackbarProvider>
     </React.StrictMode>
 );

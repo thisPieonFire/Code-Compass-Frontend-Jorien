@@ -2,18 +2,21 @@ import '../style.css'
 import {useNavigate} from "react-router-dom";
 import UserCreationComponent from "../components/UserCreationComponent.tsx";
 import {createUser} from "../lib/api.ts";
+import {useSnackbar} from "../components/SnackbarContext.tsx";
+
 
 export default function CreateUserPage() {
     const navigate = useNavigate();
-    const handleUserCreation = async (email: string, displayName: string, password: string, role: string) => {
+    const {showMessage} = useSnackbar();
+
+    const handleUserCreation = async (email: string, displayName: string, role: string) => {
         try {
-            const response = await createUser(email, displayName, password, role);
+            const response = await createUser(email, displayName, role);
             if (!response) {
                 throw new Error('Invalid response from server');
             }
+            showMessage("User creation successful!", "success")
 
-            alert('User created successfully!');
-            // kan dit óók in melding onderin?
             navigate ('/home')
 
         } catch (err) {
