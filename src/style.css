@@ -43,6 +43,7 @@ h1 {
    :root {
        --bg-1: #0f1020;
        --bg-2: #131a3a;
+       --bg-3: #1b1632;
        --neon-1: #7c3aed;   /* violet */
        --neon-2: #06b6d4;   /* cyan */
        --neon-3: #22c55e;   /* green */
@@ -63,7 +64,7 @@ h1 {
     place-items: center;
     padding: 24px;
     overflow: hidden;
-    background: radial-gradient(1200px 600px at 10% 10%, color-mix(in oklab, var(--neon-1), transparent 80%), transparent),
+    background: radial-gradient(1200px 600px at 10% 10%, color-mix(in oklab, #0f1020, transparent 80%), transparent),
                 radial-gradient(1000px 500px at 90% 20%, color-mix(in oklab, var(--neon-2), transparent 80%), transparent),
                 radial-gradient(1000px 600px at 50% 90%, color-mix(in oklab, var(--neon-3), transparent 80%), transparent),
                 linear-gradient(120deg, var(--bg-1), var(--bg-2));
@@ -71,7 +72,7 @@ h1 {
 }
 
 /* Subtle grid overlay with neon glows */
-.layout::before {
+/*.layout::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -88,7 +89,7 @@ h1 {
             );
      pointer-events: none;
     opacity: 0.6;
-}
+}*/
 
 .errorLayout {
     position: relative;
@@ -98,9 +99,9 @@ h1 {
     place-items: center;
     padding: 24px;
     overflow: hidden;
-    background: radial-gradient(1200px 600px at 10% 10%, color-mix(in oklab, var(--neon-5), transparent 80%), transparent),
+    background: radial-gradient(1200px 600px at 10% 10%, color-mix(in oklab, var(--bg-3), transparent 80%), transparent),
     radial-gradient(1000px 500px at 90% 20%, color-mix(in oklab, var(--neon-4), transparent 80%), transparent),
-    radial-gradient(1000px 600px at 50% 90%, color-mix(in oklab, var(--neon-6), transparent 80%), transparent),
+    radial-gradient(1000px 600px at 50% 90%, color-mix(in oklab, var(--neon-5), transparent 80%), transparent),
     linear-gradient(120deg, var(--bg-1), var(--bg-2));
     animation: moveGradient 16s ease-in-out infinite alternate;
 }
@@ -387,19 +388,19 @@ h1 {
     font-size: 14px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    animation: fadeInOut 3s forwards;
+    animation: fadeInOut 5s forwards;
 }
 
 .snackbar-success {
-    background: #4caf50; /* green */
+    background: var(--neon-3); /* green */
 }
 
 .snackbar-error {
-    background: #f44336; /* red */
+    background: var(--neon-4); /* red */
 }
 
 .snackbar-info {
-    background: #2196f3; /* blue */
+    background: var(--neon-2); /* blue */
 }
 
 @keyframes fadeInOut {

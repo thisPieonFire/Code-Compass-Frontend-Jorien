@@ -8,11 +8,13 @@ import CreateUserPage from "./pages/CreateUserPage.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import ForbiddenPage from "./pages/ForbiddenPage.tsx";
 import DoesNotExistYetPage from "./pages/DoesNotExistYetPage.tsx";
+import {AuthProvider} from "./authentication/AuthContext.tsx";
+import ProtectedRoute from "./authentication/ProtectedRoute.tsx";
 
 const router = createBrowserRouter([
     { path: '/', element: <HomePage /> },
     { path: '/login', element: <LoginPage /> },
-    { path: '/create-user', element: <CreateUserPage /> },
+    { path: '/create-user', element:<ProtectedRoute><CreateUserPage /></ProtectedRoute>},
     { path: '/logout', element: <LoginPage />},
     { path: '/error', element: <ErrorPage />},
     { path: '*', element: <DoesNotExistYetPage />},
@@ -21,8 +23,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
+        <AuthProvider>
         <SnackbarProvider>
         <RouterProvider router={router} />
         </SnackbarProvider>
+        </AuthProvider>
     </React.StrictMode>
 );
