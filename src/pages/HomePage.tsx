@@ -3,20 +3,20 @@
 import '../style.css';
 import WelcomeComponent from "../components/WelcomeComponent.tsx";
 
-
 export default function HomePage() {
-    const auth = localStorage.getItem('auth');
-    const user = auth ? JSON.parse(auth) : null;
-
-    const handleLogout = () => {
-        localStorage.removeItem('auth');
-        location.reload();
-        // TODO: vervangen door navigate('/logout') + echte backend logout en de HTTPOnly cookie
-    };
+    const raw = localStorage.getItem('userInfoRes');
+  let user: { email: string; displayName?: string } | null = null;
+    if (raw && raw !== 'undefined' && raw !== 'null') {
+        try {
+            user = JSON.parse(raw);
+        } catch {
+            user = null;
+        }
+    }
 
     return (
         <div className="layout">
-            <WelcomeComponent user={user} onLogout={handleLogout}/>
+            <WelcomeComponent loggedInUser={user}/>
         </div>
     );
 }
